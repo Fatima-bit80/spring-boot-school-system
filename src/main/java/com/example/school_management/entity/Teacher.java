@@ -20,22 +20,21 @@ public class Teacher {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "email")
-    private String email;
-
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "member_id")
     private Member member;
 
     @OneToMany(mappedBy = "teacher",
     cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     private List<Course> courses;
 
-    public Teacher(String firstName, String lastName, String email, Member member, List<Course> courses) {
+    public Teacher() {
+    }
+
+    public Teacher(String firstName, String lastName,  Member member, List<Course> courses) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
         this.member = member;
         this.courses = courses;
     }
@@ -56,13 +55,6 @@ public class Teacher {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
 
 
@@ -97,7 +89,6 @@ public class Teacher {
                 "teacherId=" + teacherId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
                 ", member=" + member +
                 ", courses=" + courses +
                 '}';

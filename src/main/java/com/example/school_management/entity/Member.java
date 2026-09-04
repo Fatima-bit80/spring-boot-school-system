@@ -21,15 +21,34 @@ public class Member {
     @Column(name="active")
     private int active;
 
-    public Member(String password, String role) {
-        this.password = password;
+
+    @Column(name = "email")
+    private String email;
+
+
+    public Member() {
+    }
+
+    public Member(String role) {
         this.role = role;
     }
 
-    public Member(String password, String role, int active) {
+    public Member(String role,int active) {
+        this.role = role;
+        this.active = active;
+    }
+
+    public Member(String password, String role, String email) {
+        this.password = password;
+        this.role = role;
+        this.email = email;
+    }
+
+    public Member(String password, String role, int active, String email) {
         this.password = password;
         this.role = role;
         this.active = active;
+        this.email = email;
     }
 
     public int getMemberId() {
@@ -64,6 +83,14 @@ public class Member {
         this.active = active;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "Member{" +
@@ -71,6 +98,7 @@ public class Member {
                 ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
                 ", active=" + active +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

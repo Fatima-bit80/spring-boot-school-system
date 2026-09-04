@@ -7,8 +7,12 @@ import jakarta.persistence.*;
 @Table(name="enrollment")
 public class Enrollment {
 
-@ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name="id")
+    private int id;
 
+@ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
 @JoinColumn(name="code")
     private Course course;
 
@@ -49,11 +53,19 @@ public class Enrollment {
         this.grade = grade;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @Override
     public String toString() {
         return "Enrollment{" +
-                "course=" + course +
+                "id=" + id +
+                ", course=" + course +
                 ", student=" + student +
                 ", grade=" + grade +
                 '}';

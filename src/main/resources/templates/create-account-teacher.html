@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Teacher Account</title>
+</head>
+<body>
+
+<form th:action="@{/createTeacher}" method="post" th:object="${teacherDTO}">
+
+
+    <input type="text"  th:field="*{teacher.firstName}" placeholder="First Name">
+    <input type="text"  th:field="*{teacher.lastName}" placeholder="Last Name">
+    <input type="email"  th:field="*{member.email}" placeholder="Email">
+    <input type="password" name="password" th:field="*{member.password}" placeholder="Password" >
+    <input type="text" th:field="*{member.role}" readonly>
+
+    <input type="submit" value="Create Teacher">
+</form>
+
+</body>
+</html>

@@ -19,8 +19,7 @@ public class Student {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "email")
-    private String email;
+
 
     @Column(name = "year")
     private int year;
@@ -28,18 +27,19 @@ public class Student {
 
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "member_id")
     private Member member;
 
     @OneToMany(mappedBy = "student",
     cascade = CascadeType.ALL)
     private List<Enrollment> enrollments;
 
+    public Student() {
+    }
 
-    public Student(String firstName, String lastName, String email, int year, Member member, List<Enrollment> enrollments) {
+    public Student(String firstName, String lastName,  int year, Member member, List<Enrollment> enrollments) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
         this.year = year;
         this.member = member;
         this.enrollments = enrollments;
@@ -69,13 +69,7 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
-    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public int getYear() {
         return year;
@@ -109,8 +103,7 @@ public class Student {
                 "studentId=" + studentId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", year=" + year +
+               ", year=" + year +
                 ", member=" + member +
                 ", enrollments=" + enrollments +
                 '}';

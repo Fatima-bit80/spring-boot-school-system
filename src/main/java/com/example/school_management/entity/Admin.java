@@ -20,19 +20,16 @@ public class Admin {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "email")
-    private String email;
 
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "member_id")
     private Member member;
 
 
-    public Admin(String firstName, String lastName, String email, Member member) {
+    public Admin(String firstName, String lastName, Member member) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
         this.member = member;
     }
 
@@ -52,13 +49,6 @@ public class Admin {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
 
 
@@ -77,7 +67,6 @@ public class Admin {
                 "adminId=" + adminId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
                 ", member=" + member +
                 '}';
     }
