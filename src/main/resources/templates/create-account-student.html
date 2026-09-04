@@ -12,6 +12,7 @@
     <input type="text"  th:field="*{student.firstName}" placeholder="First Name">
     <input type="text"  th:field="*{student.lastName}" placeholder="Last Name">
     <input type="email"  th:field="*{member.email}" placeholder="Email">
+    <input type="hidden" th:field="*{member.active}">
     <input type="password" name="password" th:field="*{member.password}" placeholder="Password" >
     <input type="number" name="year" th:field="*{student.year}" placeholder="Year">
     <input type="text" th:field="*{member.role}" readonly >
