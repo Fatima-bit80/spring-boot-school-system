@@ -63,4 +63,14 @@ public class SchoolServiceImpl implements  SchoolService {
     public void saveEnrollment(String courseCode, int studentId) {
         schoolDAO.saveEnrollment(courseCode, studentId);
     }
+
+    @Override
+    public List<Enrollment> findRequestsForTeacher(int teacherId) {
+        return schoolDAO.findRequestsForTeacher(teacherId);
+    }
+
+    @Override
+    public void acceptRequest(int requestId) {
+        schoolDAO.acceptRequest(requestId);
+    }
 }

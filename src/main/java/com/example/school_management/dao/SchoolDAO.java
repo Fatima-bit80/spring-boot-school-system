@@ -36,4 +36,8 @@ public interface SchoolDAO {
 
     void saveEnrollment(String courseCode, int studentId);
     void deleteEnrollment(int id);
+
+    List<Enrollment> findRequestsForTeacher(int teacherId);
+
+    void acceptRequest(int requestId);
 }

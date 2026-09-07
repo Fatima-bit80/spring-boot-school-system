@@ -43,7 +43,6 @@ public class StudentController {
     @GetMapping("/enroll/{studentId}")
     public String enroll(@PathVariable int studentId,Model model){
 
-        System.out.println("in     @GetMapping(\"/enroll/{studentId}\")\n");
 
         List<Course> availableCourses = schoolService.findAvailableCourses(studentId);
         model.addAttribute("availableCourses",availableCourses);

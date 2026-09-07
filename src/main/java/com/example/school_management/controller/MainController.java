@@ -24,7 +24,6 @@ public class MainController {
     @GetMapping("/")
     public String dashboard(Authentication authentication,Model model) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, ClassNotFoundException {
 
-        System.out.println("heeellllo");
         // get email
         String email = authentication.getName();
 

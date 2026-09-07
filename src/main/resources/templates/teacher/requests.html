@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Enrollment Requests</title>
+</head>
+<body>
+welcome!
+
+<table th:object="${requests}">
+<thead>
+<tr>
+    <th>Code</th>
+    <th>Name</th>
+    <th>Year</th>
+    <th>Student</th>
+    <th>Action</th>
+
+
+
+
+</tr>
+</thead>
+
+
+    <tbody>
+    <tr th:each="request : ${requests}">
+
+        <td th:text="${request.course.code}" />
+        <td th:text="${request.course.name}" />
+        <td th:text="${request.course.year}" />
+        <td th:text="${request.student.firstName}" />
+
+        <td>
+            <a th:href="@{/teacher/accept(requestId=${request.id},teacherId=${teacherId})}" >Accept</a>
+            /
+
+            <a th:href="@{/teacher/reject(requestId=${request.id},teacherId=${teacherId})}" >Reject</a>
+        </td>
+
+
+    </tr>
+
+
+
+
+    </tbody>
+</table>
+
+
+<a th:href="@{/}">Back</a>
+
+</body>

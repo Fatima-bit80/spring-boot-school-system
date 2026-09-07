@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher's Dashboard</title>
+</head>
+<body th:object="${schoolDTO}">
+Welcome!!
+<br>
+First Name:  <span th:text="*{teacher.firstName}"/>
+<br>
+Last Name:  <span th:text="*{teacher.lastName}"/>
+<br>
+Email:  <span th:text="*{member.email}"/>
+<br>
+
+<!-- todo view my courses
+todo grade student's
+todo accept student's requests.html or reject them -->
+
+
+<a th:href="@{/teacher/requests/{teacherId}(teacherId=*{teacher.teacherId})}">view requests</a>
+
+</body>
+</html>

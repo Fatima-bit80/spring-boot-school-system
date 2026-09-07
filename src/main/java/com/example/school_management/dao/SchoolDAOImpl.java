@@ -3,6 +3,7 @@ package com.example.school_management.dao;
 import com.example.school_management.entity.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -122,5 +123,30 @@ em.persist(teacher);
     public void deleteEnrollment(int id) {
         Enrollment enrollment = em.find(Enrollment.class, id);
         em.remove(enrollment);
+    }
+
+    @Override
+    public List<Enrollment> findRequestsForTeacher(int teacherId) {
+
+        TypedQuery<Enrollment> q = em.createQuery(
+                "SELECT e FROM Enrollment e " +
+                        "JOIN FETCH e.course c " +
+                        "JOIN c.teacher " +
+                        "JOIN FETCH e.student s " +
+                        "WHERE c.teacher.id = :teacherId AND " +
+                        "e.approved = 0",
+                Enrollment.class);
+
+        q.setParameter("teacherId", teacherId);
+        return q.getResultList();
+
+    }
+
+    @Override
+    @Transactional
+    public void acceptRequest(int requestId) {
+        Enrollment e = em.find(Enrollment.class, requestId);
+        e.setApproved(1);
+        em.persist(e);
     }
 }

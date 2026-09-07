@@ -18,4 +18,8 @@ public interface SchoolService {
     void deleteEnrollment(int id);
 
   void saveEnrollment(String courseCode, int studentId);
+
+  List<Enrollment> findRequestsForTeacher(int teacherId);
+
+  void acceptRequest(int requestId);
 }
