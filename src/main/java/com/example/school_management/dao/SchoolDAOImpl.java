@@ -1,13 +1,12 @@
 package com.example.school_management.dao;
 
-import com.example.school_management.entity.Course;
-import com.example.school_management.entity.Member;
-import com.example.school_management.entity.Student;
-import com.example.school_management.entity.Teacher;
+import com.example.school_management.entity.*;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -58,23 +57,70 @@ em.persist(teacher);
         em.persist(member);
     }
 
+
+
     @Override
-    public Teacher findTeacherById(Integer id) {
-        return null;
+    public List<Course> findAvailableCourses(int studentId) {
+
+        TypedQuery<Course> c = em.createQuery(
+                "SELECT c1 " +
+                " FROM Course c1" +
+                " WHERE c1.code NOT IN(" +
+                " SELECT c.code FROM Enrollment e "+
+                " JOIN e.course c" +
+                "  WHERE e.student.id = :studentId)", Course.class);
+
+        c.setParameter("studentId", studentId);
+
+
+
+        return c.getResultList();
     }
 
     @Override
-    public Course findCourseById(Integer id) {
-        return null;
+    public Member findMemberByEmail(String email) {
+        return em.find(Member.class, email);
     }
 
     @Override
-    public Student findStudentById(Integer id) {
-        return null;
+    public Student findStudentById(int studentId) {
+        return em.find(Student.class, studentId);
     }
 
     @Override
-    public List<Course> findAvailableCourses() {
-        return List.of();
+    public Course findCourseByCode(String courseCode) {
+        return em.find(Course.class, courseCode);
+    }
+
+    @Override
+    public List<Enrollment> findEnrollmentsOfStudent(int studentId) {
+        TypedQuery<Enrollment> q = em.createQuery(
+                "SELECT e FROM Enrollment e " +
+                        "JOIN FETCH e.course c " +
+                        "JOIN FETCH c.teacher " +
+                        "WHERE e.student.id = :studentId",
+                Enrollment.class);
+
+        q.setParameter("studentId", studentId);
+
+
+
+        return q.getResultList();
+
+
+    }
+
+    @Override
+    public void saveEnrollment(String courseCode, int studentId) {
+        Student s = findStudentById(studentId);
+        Course c = findCourseByCode(courseCode);
+        Enrollment e = new Enrollment(c,s);
+        em.persist(e);
+    }
+
+    @Override
+    public void deleteEnrollment(int id) {
+        Enrollment enrollment = em.find(Enrollment.class, id);
+        em.remove(enrollment);
     }
 }

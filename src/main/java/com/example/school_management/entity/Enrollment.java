@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 public class Enrollment {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
     private int id;
 
@@ -23,10 +23,37 @@ public class Enrollment {
 @Column(name = "grade")
     private int grade;
 
+@Column(name="approved")
+private int approved;
+
+    public Enrollment() {
+    }
+
+    public Enrollment(Course course, Student student) {
+        this.course = course;
+        this.student = student;
+        this.approved = 0;
+    }
+
     public Enrollment(Course course, Student student, int grade) {
         this.course = course;
         this.student = student;
         this.grade = grade;
+    }
+
+    public Enrollment(Course course, Student student, int grade, int approved) {
+        this.course = course;
+        this.student = student;
+        this.grade = grade;
+        this.approved = approved;
+    }
+
+    public int getApproved() {
+        return approved;
+    }
+
+    public void setApproved(int approved) {
+        this.approved = approved;
     }
 
     public Course getCourse() {
@@ -65,8 +92,6 @@ public class Enrollment {
     public String toString() {
         return "Enrollment{" +
                 "id=" + id +
-                ", course=" + course +
-                ", student=" + student +
                 ", grade=" + grade +
                 '}';
     }

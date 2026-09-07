@@ -1,15 +1,18 @@
 package com.example.school_management.dto;
 
+import com.example.school_management.entity.Admin;
 import com.example.school_management.entity.Member;
 import com.example.school_management.entity.Student;
+import com.example.school_management.entity.Teacher;
 
-public class StudentDTO {
+public class SchoolDTO {
 
     private Student student;
     private Member  member;
+    private Teacher teacher;
+    private Admin admin;
 
-    public StudentDTO(Student student, Member member) {
-        this.student = student;
+    public SchoolDTO(Member member) {
         this.member = member;
     }
 
@@ -28,5 +31,21 @@ public class StudentDTO {
 
     public void setMember(Member member) {
         this.member = member;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
     }
 }

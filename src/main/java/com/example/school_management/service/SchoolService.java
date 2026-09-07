@@ -1,8 +1,8 @@
 package com.example.school_management.service;
 
-import com.example.school_management.entity.Member;
-import com.example.school_management.entity.Student;
-import com.example.school_management.entity.Teacher;
+import com.example.school_management.entity.*;
+
+import java.util.List;
 
 public interface SchoolService {
 
@@ -10,4 +10,12 @@ public interface SchoolService {
   void saveStudent(Student student);
   void saveTeacher(Teacher teacher);
 
+    Member findMemberByEmail(String email);
+
+
+    List<Enrollment> findEnrollmentsOfStudent(int studentId);
+  List<Course> findAvailableCourses(int studentId);
+    void deleteEnrollment(int id);
+
+  void saveEnrollment(String courseCode, int studentId);
 }

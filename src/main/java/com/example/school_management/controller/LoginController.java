@@ -1,7 +1,6 @@
 package com.example.school_management.controller;
 
-import com.example.school_management.dto.StudentDTO;
-import com.example.school_management.dto.TeacherDTO;
+import com.example.school_management.dto.SchoolDTO;
 import com.example.school_management.entity.Member;
 import com.example.school_management.entity.Student;
 import com.example.school_management.entity.Teacher;
@@ -31,22 +30,24 @@ public class LoginController {
     @GetMapping("/StudentCreateAccount")
     public String showStudentCreateAccountPage(Model model) {
 
-        StudentDTO studentDTO = new StudentDTO(new Student(), new Member("ROLE_STUDENT",1));
+        SchoolDTO studentDTO = new SchoolDTO( new Member("ROLE_STUDENT",1));
+        studentDTO.setStudent(new  Student());
         model.addAttribute("studentDTO", studentDTO);
-        return "create-account-student";
+        return "create-account/create-account-student";
     }
 
     @GetMapping("/TeacherCreateAccount")
     public String showTeacherCreateAccountPage(Model model) {
 
-        TeacherDTO teacherDTO = new TeacherDTO(new Teacher(), new Member("ROLE_TEACHER",1));
+        SchoolDTO teacherDTO = new SchoolDTO( new Member("ROLE_TEACHER",1));
+        teacherDTO.setTeacher(new  Teacher());
         model.addAttribute("teacherDTO", teacherDTO);
-        return "create-account-teacher";
+        return "create-account/create-account-teacher";
     }
 
 
     @PostMapping("/createTeacher")
-    public String createTeacher(@ModelAttribute("teacherDTO") TeacherDTO teacherDTO) {
+    public String createTeacher(@ModelAttribute("teacherDTO") SchoolDTO teacherDTO) {
         Teacher teacher = teacherDTO.getTeacher();
         Member member = teacherDTO.getMember();
 
@@ -65,7 +66,7 @@ public class LoginController {
     }
 
     @PostMapping("/createStudent")
-    public String createStudent(@ModelAttribute("studentDTO") StudentDTO studentDTO){
+    public String createStudent(@ModelAttribute("studentDTO") SchoolDTO studentDTO){
 
         Student student = studentDTO.getStudent();
         Member member = studentDTO.getMember();
@@ -79,7 +80,6 @@ public class LoginController {
         student.setMember(member);
         schoolService.saveStudent(student);
 
-        System.out.println("id ="+member.getMemberId());
 
         return "redirect:/";
 

@@ -23,7 +23,7 @@ public class Admin {
 
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "email")
     private Member member;
 
 

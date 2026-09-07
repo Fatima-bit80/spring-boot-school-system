@@ -27,6 +27,9 @@ public class Course {
     cascade = CascadeType.ALL)
     private List<Enrollment> enrollments;
 
+    public Course() {
+    }
+
     public Course(String code, String name, int year, Teacher teacher, List<Enrollment> enrollments) {
         this.code = code;
         this.name = name;
@@ -81,8 +84,6 @@ public class Course {
                 "code='" + code + '\'' +
                 ", name='" + name + '\'' +
                 ", year=" + year +
-                ", teacher=" + teacher +
-                ", enrollments=" + enrollments +
                 '}';
     }
 }

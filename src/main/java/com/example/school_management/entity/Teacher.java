@@ -22,7 +22,7 @@ public class Teacher {
 
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "email")
     private Member member;
 
     @OneToMany(mappedBy = "teacher",
@@ -90,7 +90,6 @@ public class Teacher {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", member=" + member +
-                ", courses=" + courses +
                 '}';
     }
 }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+</head>
+<body th:object="${schoolDTO}">
+
+Welcome!!
+<br>
+First Name:  <span th:text="*{student.firstName}"/>
+<br>
+Last Name:  <span th:text="*{student.lastName}"/>
+<br>
+Email:  <span th:text="*{member.email}"/>
+<br>
+Year:  <span th:text="*{student.year}"/>
+
+
+<hr>
+<div sec:authorize="hasRole('ROLE_STUDENT')">
+
+    <a th:href="@{/student/enrollment/{studentId}(studentId=*{student.studentId})}">My Enrollments</a>
+    <br>
+    <a th:href="@{/student/enroll/{studentId}(studentId=*{student.studentId})}">Enroll in Courses</a>
+</div>
+
+
+</body>
+</html>

@@ -1,9 +1,6 @@
 package com.example.school_management.dao;
 
-import com.example.school_management.entity.Course;
-import com.example.school_management.entity.Member;
-import com.example.school_management.entity.Student;
-import com.example.school_management.entity.Teacher;
+import com.example.school_management.entity.*;
 
 import java.util.List;
 
@@ -12,6 +9,7 @@ public interface SchoolDAO {
     void saveStudent(Student student);
     void saveTeacher(Teacher teacher);
     void saveMember(Member member);
+
 
 
     // admin can:
@@ -23,14 +21,19 @@ public interface SchoolDAO {
     void gradeACourse();
 
     //find
-    Teacher findTeacherById(Integer id);
-    Course findCourseById(Integer id);
-    Student findStudentById(Integer id);
 
-    List<Course> findAvailableCourses();
+
+    List<Course> findAvailableCourses(int studentId);
 
 
 
+    Member findMemberByEmail(String email);
+    public Student findStudentById(int studentId);
+    public Course findCourseByCode(String courseCode);
 
 
+    List<Enrollment> findEnrollmentsOfStudent(int studentId);
+
+    void saveEnrollment(String courseCode, int studentId);
+    void deleteEnrollment(int id);
 }

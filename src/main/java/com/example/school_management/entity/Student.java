@@ -27,7 +27,7 @@ public class Student {
 
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "email")
     private Member member;
 
     @OneToMany(mappedBy = "student",
@@ -104,8 +104,6 @@ public class Student {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                ", year=" + year +
-                ", member=" + member +
-                ", enrollments=" + enrollments +
                 '}';
     }
 }

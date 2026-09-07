@@ -8,9 +8,8 @@ import org.hibernate.type.descriptor.jdbc.TinyIntJdbcType;
 public class Member {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="member_id")
-    private int memberId;
+    @Column(name = "email")
+    private String email;
 
     @Column(name = "password")
     private String password;
@@ -22,8 +21,14 @@ public class Member {
     private int active;
 
 
-    @Column(name = "email")
-    private String email;
+
+
+    @OneToOne(mappedBy="member")
+    private Teacher teacher;
+
+
+    @OneToOne(mappedBy="member")
+    private Student student;
 
 
     public Member() {
@@ -51,13 +56,7 @@ public class Member {
         this.email = email;
     }
 
-    public int getMemberId() {
-        return memberId;
-    }
 
-    public void setMemberId(int memberId) {
-        this.memberId = memberId;
-    }
 
     public String getPassword() {
         return password;
@@ -91,10 +90,25 @@ public class Member {
         this.email = email;
     }
 
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
     @Override
     public String toString() {
         return "Member{" +
-                "memberId=" + memberId +
                 ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
                 ", active=" + active +

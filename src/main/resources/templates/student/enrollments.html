@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>My Courses</title>
+</head>
+<body>
+welcome!
+
+<table th:object="${enrollments}">
+<thead>
+<tr>
+    <th>Code</th>
+    <th>Name</th>
+    <th>Year</th>
+    <th>Teacher</th>
+    <th>Grades</th>
+    <th>Status</th>
+    <th>Drop Out</th>
+
+
+
+</tr>
+</thead>
+
+
+    <tbody>
+    <tr th:each="enrollment : ${enrollments}">
+
+        <td th:text="${enrollment.course.code}" />
+        <td th:text="${enrollment.course.name}" />
+        <td th:text="${enrollment.course.year}" />
+        <td th:text="${enrollment.course.teacher.firstName}" />
+        <td th:text="${enrollment.approved == 1} ? ${enrollment.grade} : 'no grade'" />
+        <td>
+        <span th:if="${enrollment.approved}==1"   >
+
+            Enrolled
+        </span>
+
+        <span th:if="${enrollment.approved}==0">
+            Waiting
+        </span>
+
+        </td>
+
+        <td>
+            <a th:href="@{/student/dropout(enrollmentId=${enrollment.id},studentId=${enrollment.student.studentId})}" >Drop Out/Cancel Request</a>
+        </td>
+    </tr>
+
+
+
+
+    </tbody>
+</table>
+
+
+<a th:href="@{/}">Back</a>
+
+</body>
