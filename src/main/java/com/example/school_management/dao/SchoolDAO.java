@@ -48,5 +48,7 @@ public interface SchoolDAO {
 
     void updateGrades(GradesForm gradesForm);
 
-    List<Integer> getAllTeachersIds();
+    List<Teacher> getAllTeachers();
+
+    Teacher findTeacherById(int teacherId);
 }

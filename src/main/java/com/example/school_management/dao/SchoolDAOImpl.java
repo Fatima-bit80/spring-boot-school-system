@@ -188,15 +188,16 @@ em.persist(teacher);
     }
 
     @Override
-    public List<Integer> getAllTeachersIds() {
+    public List<Teacher> getAllTeachers() {
+        TypedQuery<Teacher> q = em.createQuery("FROM Teacher", Teacher.class);
+       return q.getResultList();
 
+    }
 
-        TypedQuery<Integer> q = em.createQuery(
-                "SELECT t.id FROM Teacher t "
-                ,
-                Integer.class);
-
-        return q.getResultList();
+    @Override
+    public Teacher findTeacherById(int teacherId) {
+        Teacher t = em.find(Teacher.class, teacherId);
+        return t;
 
     }
 }

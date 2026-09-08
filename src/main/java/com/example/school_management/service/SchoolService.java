@@ -1,5 +1,6 @@
 package com.example.school_management.service;
 
+import com.example.school_management.dto.CourseDTO;
 import com.example.school_management.dto.GradesForm;
 import com.example.school_management.entity.*;
 
@@ -30,5 +31,7 @@ public interface SchoolService {
 
   void updateGrades(GradesForm gradesForm);
 
-  List<Integer> getAllTeachersIds();
+  List<Teacher> getAllTeachers();
+
+  void saveCourse(CourseDTO courseDTO);
 }

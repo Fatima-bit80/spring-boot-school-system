@@ -1,6 +1,7 @@
 package com.example.school_management.service;
 
 import com.example.school_management.dao.SchoolDAO;
+import com.example.school_management.dto.CourseDTO;
 import com.example.school_management.dto.GradesForm;
 import com.example.school_management.entity.*;
 import jakarta.transaction.Transactional;
@@ -92,7 +93,21 @@ public class SchoolServiceImpl implements  SchoolService {
     }
 
     @Override
-    public List<Integer> getAllTeachersIds() {
-        return schoolDAO.getAllTeachersIds();
+    public List<Teacher> getAllTeachers() {
+        return schoolDAO.getAllTeachers();
+    }
+
+    @Override
+    @Transactional
+    public void saveCourse(CourseDTO courseDTO) {
+        Course course = new Course();
+        course.setCode(courseDTO.getCode());
+        course.setName(courseDTO.getName());
+        course.setYear(courseDTO.getYear());
+
+        Teacher teacher = schoolDAO.findTeacherById(courseDTO.getTeacherId());
+        course.setTeacher(teacher);
+
+        schoolDAO.saveCourse(course);
     }
 }
