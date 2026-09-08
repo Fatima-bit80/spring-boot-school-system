@@ -186,4 +186,17 @@ em.persist(teacher);
             em.persist(e);
         }
     }
+
+    @Override
+    public List<Integer> getAllTeachersIds() {
+
+
+        TypedQuery<Integer> q = em.createQuery(
+                "SELECT t.id FROM Teacher t "
+                ,
+                Integer.class);
+
+        return q.getResultList();
+
+    }
 }

@@ -90,4 +90,9 @@ public class SchoolServiceImpl implements  SchoolService {
     public void updateGrades(GradesForm gradesForm) {
         schoolDAO.updateGrades(gradesForm);
     }
+
+    @Override
+    public List<Integer> getAllTeachersIds() {
+        return schoolDAO.getAllTeachersIds();
+    }
 }

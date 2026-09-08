@@ -47,4 +47,6 @@ public interface SchoolDAO {
     List<Enrollment> findEnrollmentsOfCourse(String code);
 
     void updateGrades(GradesForm gradesForm);
+
+    List<Integer> getAllTeachersIds();
 }

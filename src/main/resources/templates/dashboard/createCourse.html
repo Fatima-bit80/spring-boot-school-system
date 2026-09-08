@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
     <title>Create Course</title>
@@ -7,9 +7,14 @@
 <body>
 
 
-<form action="@{/admin/createCourse}" method="post">
+<form th:action="@{/admin/createCourse}" method="post" th:object="${courseDTO}">
+
+Code: <input type="text" th:field="*{code}" />
+    Name: <input type="text" th:field="*{name}" />
+    Year: <input type="text" th:field="*{year}" />
 
 
+    <button type="submit">Create Course</button>
 
 </form>
 </body>
