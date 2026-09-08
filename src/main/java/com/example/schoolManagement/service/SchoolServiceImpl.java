@@ -67,14 +67,14 @@ public class SchoolServiceImpl implements  SchoolService {
     }
 
     @Override
-    public List<Enrollment> findRequestsForTeacher(int teacherId) {
-        return schoolDAO.findRequestsForTeacher(teacherId);
+    public List<Enrollment> findEnrollmentRequestsForTeacher(int teacherId) {
+        return schoolDAO.findEnrollmentRequestsForTeacher(teacherId);
     }
 
     @Override
     @Transactional
-    public void acceptRequest(int requestId) {
-        schoolDAO.acceptRequest(requestId);
+    public void acceptEnrollmentRequest(int requestId) {
+        schoolDAO.acceptEnrollmentRequest(requestId);
     }
 
     @Override

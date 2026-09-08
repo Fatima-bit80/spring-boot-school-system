@@ -111,7 +111,7 @@ em.persist(teacher);
     }
 
     @Override
-    public List<Enrollment> findRequestsForTeacher(int teacherId) {
+    public List<Enrollment> findEnrollmentRequestsForTeacher(int teacherId) {
 
         TypedQuery<Enrollment> q = em.createQuery(
                 "SELECT e FROM Enrollment e " +
@@ -128,7 +128,7 @@ em.persist(teacher);
     }
 
     @Override
-    public void acceptRequest(int requestId) {
+    public void acceptEnrollmentRequest(int requestId) {
         Enrollment e = em.find(Enrollment.class, requestId);
         e.setApproved(1);
         em.persist(e);

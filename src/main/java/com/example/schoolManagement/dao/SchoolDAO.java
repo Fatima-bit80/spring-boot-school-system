@@ -6,43 +6,28 @@ import com.example.schoolManagement.entity.*;
 import java.util.List;
 
 public interface SchoolDAO {
-    //guests can:
+    //accounts
+    void saveMember(Member member);
     void saveStudent(Student student);
     void saveTeacher(Teacher teacher);
-    void saveMember(Member member);
-
-
-
-    // admin can:
-    void saveCourse(Course course);
-
-
-
-    List<Course> findAvailableCourses(int studentId);
-
-
-
     Member findMemberByEmail(String email);
-    public Student findStudentById(int studentId);
-    public Course findCourseByCode(String courseCode);
-
-
-    List<Enrollment> findEnrollmentsOfStudent(int studentId);
-
-    void saveEnrollment(String courseCode, int studentId);
-    void deleteEnrollment(int id);
-
-    List<Enrollment> findRequestsForTeacher(int teacherId);
-
-    void acceptRequest(int requestId);
-
-    List<Course> findCoursesByTeacherId(int teacherId);
-
-    List<Enrollment> findEnrollmentsOfCourse(String code);
-
-    void updateGrades(GradesForm gradesForm);
-
+    Student findStudentById(int studentId);
+    Teacher findTeacherById(int teacherId);
     List<Teacher> getAllTeachers();
 
-    Teacher findTeacherById(int teacherId);
+    //courses:
+    void saveCourse(Course course);
+    List<Course> findAvailableCourses(int studentId);
+    Course findCourseByCode(String courseCode);
+    List<Course> findCoursesByTeacherId(int teacherId);
+
+    //enrollments:
+    List<Enrollment> findEnrollmentsOfStudent(int studentId);
+    List<Enrollment> findEnrollmentsOfCourse(String code);
+    void saveEnrollment(String courseCode, int studentId);
+    void deleteEnrollment(int id);
+    List<Enrollment> findEnrollmentRequestsForTeacher(int teacherId);
+    void acceptEnrollmentRequest(int requestId);
+    void updateGrades(GradesForm gradesForm);
+
 }

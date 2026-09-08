@@ -8,30 +8,29 @@ import java.util.List;
 
 public interface SchoolService {
 
+
+  //accounts:
     void saveMember(Member member);
   void saveStudent(Student student);
   void saveTeacher(Teacher teacher);
-
     Member findMemberByEmail(String email);
-
-
-    List<Enrollment> findEnrollmentsOfStudent(int studentId);
-  List<Course> findAvailableCourses(int studentId);
-    void deleteEnrollment(int id);
-
-  void saveEnrollment(String courseCode, int studentId);
-
-  List<Enrollment> findRequestsForTeacher(int teacherId);
-
-  void acceptRequest(int requestId);
-
-  List<Course> findCoursesByTeacherId(int teacherId);
-
-  List<Enrollment> findEnrollmentsOfCourse(String code);
-
-  void updateGrades(GradesForm gradesForm);
-
   List<Teacher> getAllTeachers();
 
+
+  //courses
   void saveCourse(CourseDTO courseDTO);
-}  
+  List<Course> findAvailableCourses(int studentId);
+  List<Course> findCoursesByTeacherId(int teacherId);
+
+
+  //enrollments:
+    List<Enrollment> findEnrollmentsOfStudent(int studentId);
+  List<Enrollment> findEnrollmentsOfCourse(String code);
+  void saveEnrollment(String courseCode, int studentId);
+  void deleteEnrollment(int id);
+  List<Enrollment> findEnrollmentRequestsForTeacher(int teacherId);
+  void acceptEnrollmentRequest(int requestId);
+  void updateGrades(GradesForm gradesForm);
+
+
+}

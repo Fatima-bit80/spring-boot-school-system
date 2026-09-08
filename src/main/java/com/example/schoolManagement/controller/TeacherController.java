@@ -29,7 +29,7 @@ public class TeacherController {
     @GetMapping("/requests/{teacherId}")
     public String requestTeacher(@PathVariable("teacherId") int teacherId, Model model) {
 
-        List<Enrollment> requests = schoolService.findRequestsForTeacher(teacherId);
+        List<Enrollment> requests = schoolService.findEnrollmentRequestsForTeacher(teacherId);
 
         model.addAttribute("requests", requests);
         model.addAttribute("teacherId", teacherId);
@@ -39,7 +39,7 @@ public class TeacherController {
 
     @GetMapping("/accept")
     public String acceptRequest(@RequestParam("requestId") int requestId, @RequestParam("teacherId") int teacherId) {
-        schoolService.acceptRequest(requestId);
+        schoolService.acceptEnrollmentRequest(requestId);
 
         return "redirect:/teacher/requests/" + teacherId;
     }
