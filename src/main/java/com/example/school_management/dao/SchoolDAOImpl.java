@@ -1,5 +1,7 @@
 package com.example.school_management.dao;
 
+import com.example.school_management.dto.GradeRow;
+import com.example.school_management.dto.GradesForm;
 import com.example.school_management.entity.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -148,5 +150,40 @@ em.persist(teacher);
         Enrollment e = em.find(Enrollment.class, requestId);
         e.setApproved(1);
         em.persist(e);
+    }
+
+    @Override
+    public List<Course> findCoursesByTeacherId(int teacherId) {
+        TypedQuery<Course> q = em.createQuery(
+                "SELECT t.courses " +
+                        "FROM Teacher t " +
+                        "WHERE t.teacherId = :teacherId",
+                Course.class);
+
+        q.setParameter("teacherId", teacherId);
+        return q.getResultList();
+    }
+
+    @Override
+    public List<Enrollment> findEnrollmentsOfCourse(String code) {
+
+        TypedQuery<Enrollment> q = em.createQuery(
+                "SELECT e FROM Enrollment e " +
+                        "JOIN FETCH e.student s " +
+                        "WHERE e.course.code = :code AND e.approved = 1"
+                ,
+                Enrollment.class);
+
+        q.setParameter("code", code);
+        return q.getResultList();
+    }
+
+    @Override
+    public void updateGrades(GradesForm gradesForm) {
+        for(GradeRow row : gradesForm.getRows()) {
+            Enrollment e = em.find(Enrollment.class, row.getEnrollmentId());
+            e.setGrade(row.getGrade());
+            em.persist(e);
+        }
     }
 }

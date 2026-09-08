@@ -1,5 +1,6 @@
 package com.example.school_management.dao;
 
+import com.example.school_management.dto.GradesForm;
 import com.example.school_management.entity.*;
 
 import java.util.List;
@@ -40,4 +41,10 @@ public interface SchoolDAO {
     List<Enrollment> findRequestsForTeacher(int teacherId);
 
     void acceptRequest(int requestId);
+
+    List<Course> findCoursesByTeacherId(int teacherId);
+
+    List<Enrollment> findEnrollmentsOfCourse(String code);
+
+    void updateGrades(GradesForm gradesForm);
 }

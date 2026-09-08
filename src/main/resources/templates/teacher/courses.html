@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Courses</title>
+</head>
+<body>
+
+
+<table th:object="${courses}">
+    <thead>
+    <tr>
+        <th>Code</th>
+        <th>Name</th>
+        <th>Year</th>
+        <th>Students</th>
+    </tr>
+    </thead>
+
+
+    <tbody>
+    <tr th:each="course : ${courses}">
+
+        <td th:text="${course.code}" />
+        <td th:text="${course.name}" />
+        <td th:text="${course.year}" />
+
+        <td>
+            <a th:href="@{/teacher/courseEnrollments/{courseCode}(courseCode=${course.code})}" >Enrollments</a>
+        </td>
+
+
+    </tr>
+
+
+
+
+    </tbody>
+</table>
+
+
+</body>
+</html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
     <title>Teacher's Dashboard</title>
@@ -15,11 +15,11 @@ Email:  <span th:text="*{member.email}"/>
 <br>
 
 <!-- todo view my courses
-todo grade student's
-todo accept student's requests.html or reject them -->
+todo grade student's-->
 
 
-<a th:href="@{/teacher/requests/{teacherId}(teacherId=*{teacher.teacherId})}">view requests</a>
+<a th:href="@{/teacher/requests/{teacherId}(teacherId=*{teacher.teacherId})}">Requests</a>
+<a th:href="@{/teacher/courses/{teacherId}(teacherId=*{teacher.teacherId})}">Courses</a>
 
 </body>
 </html>

@@ -26,6 +26,7 @@ public class Student {
 
 
 
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "email")
     private Member member;
@@ -44,6 +45,7 @@ public class Student {
         this.member = member;
         this.enrollments = enrollments;
     }
+
 
     public int getStudentId() {
         return studentId;

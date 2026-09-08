@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Enrollments</title>
+</head>
+<body>
+
+
+<form th:action="@{/teacher/updateGrades}" method="post" th:object="${gradesForm}" >
+
+
+    course: <span th:text="${code}"/>
+<table>
+
+
+    <thead>
+    <tr>
+        <th>Student Name</th>
+        <th>Grade</th>
+    </tr>
+    </thead>
+
+
+    <tbody>
+    <tr th:each="enrollment, stat : ${enrollments}">
+
+
+        <td th:text="${enrollment.student.firstName} + ' ' + ${enrollment.student.lastName}" />
+
+        <td>
+            <input type="hidden"
+                   th:field="*{rows[__${stat.index}__].enrollmentId}" />
+
+
+            <input type="number"
+                   th:field="*{rows[__${stat.index}__].grade}"
+                   th:value="${enrollment.grade}" />
+
+        </td>
+
+
+    </tr>
+
+
+
+
+    </tbody>
+</table>
+    <input type="hidden" th:field="*{code}" />
+
+
+    <input type="submit" value="Update Grades">
+</form>
+
+
+</body>
+</html>

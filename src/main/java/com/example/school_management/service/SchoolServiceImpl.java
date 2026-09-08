@@ -1,6 +1,7 @@
 package com.example.school_management.service;
 
 import com.example.school_management.dao.SchoolDAO;
+import com.example.school_management.dto.GradesForm;
 import com.example.school_management.entity.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,5 +73,21 @@ public class SchoolServiceImpl implements  SchoolService {
     @Override
     public void acceptRequest(int requestId) {
         schoolDAO.acceptRequest(requestId);
+    }
+
+    @Override
+    public List<Course> findCoursesByTeacherId(int teacherId) {
+        return schoolDAO.findCoursesByTeacherId(teacherId);
+    }
+
+    @Override
+    public List<Enrollment> findEnrollmentsOfCourse(String code) {
+        return schoolDAO.findEnrollmentsOfCourse(code);
+    }
+
+    @Override
+    @Transactional
+    public void updateGrades(GradesForm gradesForm) {
+        schoolDAO.updateGrades(gradesForm);
     }
 }
