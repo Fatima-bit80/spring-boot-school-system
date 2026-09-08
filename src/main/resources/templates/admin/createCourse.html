@@ -10,19 +10,19 @@
 <form th:action="@{/admin/createCourse}" method="post" th:object="${courseDTO}">
 
 Code: <input type="text" th:field="*{code}" />
+    <br>
     Name: <input type="text" th:field="*{name}" />
+    <br>
     Year: <input type="text" th:field="*{year}" />
+    <br>
 
 
+    <select th:field="*{teacherId}">
 
-    <select th:each="teacher : ${teachers}" th:field="*{teacherId}">
-
-
-
-        <option th:value="${teacher.id}"  th:text="${teacher.firstName}+' '+${teacher.lastName}"/>
+        <option th:each="teacher : ${teachers}" th:value="${teacher.teacherId}"  th:text="${teacher.firstName}+' '+${teacher.lastName}"/>
 
     </select>
-
+    <br>
     <button type="submit">Create Course</button>
 
 </form>

@@ -26,6 +26,8 @@ public class Admin {
     @JoinColumn(name = "email")
     private Member member;
 
+    public Admin() {
+    }
 
     public Admin(String firstName, String lastName, Member member) {
         this.firstName = firstName;

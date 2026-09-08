@@ -30,7 +30,7 @@
         <td th:text="${course.code}" />
         <td th:text="${course.name}" />
         <td th:text="${course.year}" />
-        <td th:text="${course.teacher.firstName}" />
+        <td th:text="${course.teacher.firstName}+' '+${course.teacher.lastName}" />
 
         <td>
             <a th:href="@{/student/requestEnrollment(courseCode=${course.code},studentId=${studentId})}" >Enrollment Request</a>

@@ -90,13 +90,9 @@ public class TeacherController {
     @PostMapping("/updateGrades")
     public String updateGrades(@ModelAttribute("gradesForm") GradesForm gradesForm) {
 
-        for (GradeRow g: gradesForm.getRows()){
-            System.out.println(g);
-        }
-
+  
 schoolService.updateGrades(gradesForm);
 
-        System.out.println(gradesForm.getCode()+"nnnnnn");
 
         return "redirect:/teacher/courseEnrollments/"+gradesForm.getCode();
 

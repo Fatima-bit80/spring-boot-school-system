@@ -10,7 +10,7 @@
 <form th:action="@{/teacher/updateGrades}" method="post" th:object="${gradesForm}" >
 
 
-    course: <span th:text="${code}"/>
+    course: <span th:text="*{code}"/>
 <table>
 
 

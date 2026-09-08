@@ -34,4 +34,4 @@ public interface SchoolService {
   List<Teacher> getAllTeachers();
 
   void saveCourse(CourseDTO courseDTO);
-}
+}  

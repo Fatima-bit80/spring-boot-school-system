@@ -22,6 +22,8 @@ public class Member {
 
 
 
+    @OneToOne(mappedBy="member")
+    private Admin admin;
 
     @OneToOne(mappedBy="member")
     private Teacher teacher;
@@ -104,6 +106,14 @@ public class Member {
 
     public void setStudent(Student student) {
         this.student = student;
+    }
+
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
     }
 
     @Override
