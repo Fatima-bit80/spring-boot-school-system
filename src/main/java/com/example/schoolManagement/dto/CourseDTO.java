@@ -1,7 +1,4 @@
-package com.example.school_management.dto;
-
-import com.example.school_management.entity.Teacher;
-import jakarta.persistence.*;
+package com.example.schoolManagement.dto;
 
 public class CourseDTO {
 

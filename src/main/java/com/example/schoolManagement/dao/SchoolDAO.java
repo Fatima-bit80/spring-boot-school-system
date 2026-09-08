@@ -1,7 +1,7 @@
-package com.example.school_management.dao;
+package com.example.schoolManagement.dao;
 
-import com.example.school_management.dto.GradesForm;
-import com.example.school_management.entity.*;
+import com.example.schoolManagement.dto.GradesForm;
+import com.example.schoolManagement.entity.*;
 
 import java.util.List;
 
@@ -15,13 +15,7 @@ public interface SchoolDAO {
 
     // admin can:
     void saveCourse(Course course);
-    void assignCourseToTeacher();
 
-    //teacher can:
-    void acceptStudentInCourse();
-    void gradeACourse();
-
-    //find
 
 
     List<Course> findAvailableCourses(int studentId);

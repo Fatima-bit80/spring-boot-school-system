@@ -1,9 +1,8 @@
-package com.example.school_management.controller;
+package com.example.schoolManagement.controller;
 
-import com.example.school_management.dto.CourseDTO;
-import com.example.school_management.entity.Course;
-import com.example.school_management.entity.Teacher;
-import com.example.school_management.service.SchoolService;
+import com.example.schoolManagement.dto.CourseDTO;
+import com.example.schoolManagement.entity.Teacher;
+import com.example.schoolManagement.service.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,4 +1,4 @@
-package com.example.school_management.dto;
+package com.example.schoolManagement.dto;
 
 import java.util.List;
 

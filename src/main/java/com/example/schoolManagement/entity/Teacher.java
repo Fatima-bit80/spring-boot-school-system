@@ -1,4 +1,4 @@
-package com.example.school_management.entity;
+package com.example.schoolManagement.entity;
 
 
 
@@ -7,12 +7,13 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "admin")
-public class Admin {
+@Table(name = "teacher")
+public class Teacher {
 
     @Id
     @Column(name = "id")
-    private int adminId;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private int teacherId;
 
     @Column(name = "first_name")
     private String firstName;
@@ -21,18 +22,22 @@ public class Admin {
     private String lastName;
 
 
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "email")
     private Member member;
 
-    public Admin() {
+    @OneToMany(mappedBy = "teacher",
+    cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    private List<Course> courses;
+
+    public Teacher() {
     }
 
-    public Admin(String firstName, String lastName, Member member) {
+    public Teacher(String firstName, String lastName,  Member member, List<Course> courses) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.member = member;
+        this.courses = courses;
     }
 
     public String getFirstName() {
@@ -63,10 +68,26 @@ public class Admin {
         this.member = member;
     }
 
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    public int getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(int teacherId) {
+        this.teacherId = teacherId;
+    }
+
     @Override
     public String toString() {
-        return "Admin{" +
-                "adminId=" + adminId +
+        return "Teacher{" +
+                "teacherId=" + teacherId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", member=" + member +

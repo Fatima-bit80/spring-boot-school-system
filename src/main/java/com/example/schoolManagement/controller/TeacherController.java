@@ -1,10 +1,10 @@
-package com.example.school_management.controller;
+package com.example.schoolManagement.controller;
 
-import com.example.school_management.dto.GradeRow;
-import com.example.school_management.dto.GradesForm;
-import com.example.school_management.entity.Course;
-import com.example.school_management.entity.Enrollment;
-import com.example.school_management.service.SchoolService;
+import com.example.schoolManagement.dto.GradeRow;
+import com.example.schoolManagement.dto.GradesForm;
+import com.example.schoolManagement.entity.Course;
+import com.example.schoolManagement.entity.Enrollment;
+import com.example.schoolManagement.service.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

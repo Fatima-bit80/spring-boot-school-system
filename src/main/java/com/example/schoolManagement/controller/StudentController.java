@@ -1,9 +1,8 @@
-package com.example.school_management.controller;
+package com.example.schoolManagement.controller;
 
-import com.example.school_management.entity.Course;
-import com.example.school_management.entity.Enrollment;
-import com.example.school_management.entity.Student;
-import com.example.school_management.service.SchoolService;
+import com.example.schoolManagement.entity.Course;
+import com.example.schoolManagement.entity.Enrollment;
+import com.example.schoolManagement.service.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +25,6 @@ public class StudentController {
 
     @GetMapping("/enrollment/{studentId}")
     public String enrollments(@PathVariable int studentId,Model model){
-        System.out.println(model);
       List<Enrollment> enrollments = schoolService.findEnrollmentsOfStudent(studentId);
       model.addAttribute("enrollments",enrollments);
       model.addAttribute("studentId",studentId);

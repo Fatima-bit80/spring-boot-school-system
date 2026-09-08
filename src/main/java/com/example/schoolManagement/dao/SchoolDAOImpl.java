@@ -1,15 +1,13 @@
-package com.example.school_management.dao;
+package com.example.schoolManagement.dao;
 
-import com.example.school_management.dto.GradeRow;
-import com.example.school_management.dto.GradesForm;
-import com.example.school_management.entity.*;
+import com.example.schoolManagement.dto.GradeRow;
+import com.example.schoolManagement.dto.GradesForm;
+import com.example.schoolManagement.entity.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -32,21 +30,6 @@ public class SchoolDAOImpl implements SchoolDAO{
     @Override
     public void saveCourse(Course course) {
 em.persist(course);
-
-    }
-
-    @Override
-    public void assignCourseToTeacher() {
-
-    }
-
-    @Override
-    public void acceptStudentInCourse() {
-
-    }
-
-    @Override
-    public void gradeACourse() {
 
     }
 
@@ -145,7 +128,6 @@ em.persist(teacher);
     }
 
     @Override
-    @Transactional
     public void acceptRequest(int requestId) {
         Enrollment e = em.find(Enrollment.class, requestId);
         e.setApproved(1);

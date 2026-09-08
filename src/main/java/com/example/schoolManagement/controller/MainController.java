@@ -1,8 +1,8 @@
-package com.example.school_management.controller;
+package com.example.schoolManagement.controller;
 
-import com.example.school_management.dto.SchoolDTO;
-import com.example.school_management.entity.Member;
-import com.example.school_management.service.SchoolService;
+import com.example.schoolManagement.dto.SchoolDTO;
+import com.example.schoolManagement.entity.Member;
+import com.example.schoolManagement.service.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;

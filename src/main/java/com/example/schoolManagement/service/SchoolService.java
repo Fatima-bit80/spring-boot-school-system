@@ -1,8 +1,8 @@
-package com.example.school_management.service;
+package com.example.schoolManagement.service;
 
-import com.example.school_management.dto.CourseDTO;
-import com.example.school_management.dto.GradesForm;
-import com.example.school_management.entity.*;
+import com.example.schoolManagement.dto.CourseDTO;
+import com.example.schoolManagement.dto.GradesForm;
+import com.example.schoolManagement.entity.*;
 
 import java.util.List;
 

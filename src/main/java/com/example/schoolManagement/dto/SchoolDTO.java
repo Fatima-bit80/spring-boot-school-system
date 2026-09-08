@@ -1,9 +1,9 @@
-package com.example.school_management.dto;
+package com.example.schoolManagement.dto;
 
-import com.example.school_management.entity.Admin;
-import com.example.school_management.entity.Member;
-import com.example.school_management.entity.Student;
-import com.example.school_management.entity.Teacher;
+import com.example.schoolManagement.entity.Admin;
+import com.example.schoolManagement.entity.Member;
+import com.example.schoolManagement.entity.Student;
+import com.example.schoolManagement.entity.Teacher;
 
 public class SchoolDTO {
 

@@ -1,10 +1,10 @@
-package com.example.school_management.controller;
+package com.example.schoolManagement.controller;
 
-import com.example.school_management.dto.SchoolDTO;
-import com.example.school_management.entity.Member;
-import com.example.school_management.entity.Student;
-import com.example.school_management.entity.Teacher;
-import com.example.school_management.service.SchoolService;
+import com.example.schoolManagement.dto.SchoolDTO;
+import com.example.schoolManagement.entity.Member;
+import com.example.schoolManagement.entity.Student;
+import com.example.schoolManagement.entity.Teacher;
+import com.example.schoolManagement.service.SchoolService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -75,7 +75,6 @@ public class LoginController {
         member.setPassword(password);
 
 
-        System.out.println("member: "+member);
         schoolService.saveMember(member);
         student.setMember(member);
         schoolService.saveStudent(student);

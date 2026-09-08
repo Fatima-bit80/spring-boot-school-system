@@ -1,4 +1,4 @@
-package com.example.school_management.entity;
+package com.example.schoolManagement.entity;
 
 
 import jakarta.persistence.*;
@@ -11,6 +11,7 @@ public class Student {
 
     @Id
     @Column(name = "id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int studentId;
 
     @Column(name = "first_name")

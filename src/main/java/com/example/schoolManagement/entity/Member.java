@@ -1,7 +1,6 @@
-package com.example.school_management.entity;
+package com.example.schoolManagement.entity;
 
 import jakarta.persistence.*;
-import org.hibernate.type.descriptor.jdbc.TinyIntJdbcType;
 
 @Entity
 @Table(name = "member")

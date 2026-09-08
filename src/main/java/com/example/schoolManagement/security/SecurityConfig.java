@@ -1,4 +1,4 @@
-package com.example.school_management.security;
+package com.example.schoolManagement.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,6 +38,9 @@ public class SecurityConfig {
                         configurer
                                 .requestMatchers("/StudentCreateAccount", "/TeacherCreateAccount", "/createStudent", "/createTeacher").permitAll()
                                 .requestMatchers("/").hasAnyRole("STUDENT", "TEACHER", "ADMIN")
+                                .requestMatchers("/admin/**").hasRole("ADMIN")
+                                .requestMatchers("/teacher/**").hasRole("TEACHER")
+                                 .requestMatchers("/student/**").hasRole("STUDENT")
                                   .anyRequest().authenticated()
                 ).exceptionHandling(configurer ->
                         configurer
