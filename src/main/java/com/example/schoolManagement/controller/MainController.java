@@ -53,7 +53,7 @@ public class MainController {
         SchoolDTO dto = new SchoolDTO(member);
 
         Class<?>dtoClass = dto.getClass();
-        Class cls=Class.forName( "com.example.school_management.entity."+ roleFormatted);
+        Class cls=Class.forName( "com.example.schoolManagement.entity."+ roleFormatted);
         Method setterMethod = dtoClass.getMethod(setter,cls);
 
         setterMethod.invoke(dto,user);

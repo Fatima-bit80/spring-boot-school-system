@@ -2,6 +2,7 @@ package com.example.schoolManagement.service;
 
 import com.example.schoolManagement.dao.SchoolDAO;
 import com.example.schoolManagement.dto.CourseDTO;
+import com.example.schoolManagement.dto.GradeRow;
 import com.example.schoolManagement.dto.GradesForm;
 import com.example.schoolManagement.entity.*;
 import jakarta.transaction.Transactional;
@@ -23,20 +24,20 @@ public class SchoolServiceImpl implements  SchoolService {
     @Override
     @Transactional
     public void saveMember(Member member) {
-        schoolDAO.saveMember(member);
+        schoolDAO.save(member);
     }
 
 
     @Override
     @Transactional
     public void saveStudent(Student student) {
-        schoolDAO.saveStudent(student);
+        schoolDAO.save(student);
     }
 
     @Override
     @Transactional
     public void saveTeacher(Teacher teacher) {
-        schoolDAO.saveTeacher(teacher);
+        schoolDAO.save(teacher);
     }
 
     @Override
@@ -46,12 +47,12 @@ public class SchoolServiceImpl implements  SchoolService {
 
     @Override
     public List<Enrollment> findEnrollmentsOfStudent(int studentId) {
-        return schoolDAO.findEnrollmentsOfStudent(studentId);
+        return schoolDAO.findEnrollmentsForStudent(studentId);
     }
 
     @Override
     public List<Course> findAvailableCourses(int studentId) {
-        return schoolDAO.findAvailableCourses(studentId);
+        return schoolDAO.findAvailableCoursesForStudent(studentId);
     }
 
     @Override
@@ -63,7 +64,10 @@ public class SchoolServiceImpl implements  SchoolService {
     @Override
     @Transactional
     public void saveEnrollment(String courseCode, int studentId) {
-        schoolDAO.saveEnrollment(courseCode, studentId);
+        Student s =schoolDAO.findStudentById(studentId);
+        Course c =schoolDAO.findCourseByCode(courseCode);
+        Enrollment e = new Enrollment(c,s);
+        schoolDAO.save(e);
     }
 
     @Override
@@ -74,28 +78,35 @@ public class SchoolServiceImpl implements  SchoolService {
     @Override
     @Transactional
     public void acceptEnrollmentRequest(int requestId) {
-        schoolDAO.acceptEnrollmentRequest(requestId);
+        Enrollment e = schoolDAO.findEnrollmentById(requestId);
+        e.setApproved(1);
+        schoolDAO.save(e);
     }
 
     @Override
     public List<Course> findCoursesByTeacherId(int teacherId) {
-        return schoolDAO.findCoursesByTeacherId(teacherId);
+        return schoolDAO.findCoursesForTeacher(teacherId);
     }
 
     @Override
     public List<Enrollment> findEnrollmentsOfCourse(String code) {
-        return schoolDAO.findEnrollmentsOfCourse(code);
+        return schoolDAO.findEnrollmentsForCourse(code);
     }
 
     @Override
     @Transactional
     public void updateGrades(GradesForm gradesForm) {
-        schoolDAO.updateGrades(gradesForm);
+        for(GradeRow row : gradesForm.getRows()) {
+            Enrollment e = schoolDAO.findEnrollmentById(row.getEnrollmentId());
+            e.setGrade(row.getGrade());
+
+schoolDAO.save(e);
+        }
     }
 
     @Override
     public List<Teacher> getAllTeachers() {
-        return schoolDAO.getAllTeachers();
+        return schoolDAO.findAllTeachers();
     }
 
     @Override
@@ -109,6 +120,6 @@ public class SchoolServiceImpl implements  SchoolService {
         Teacher teacher = schoolDAO.findTeacherById(courseDTO.getTeacherId());
         course.setTeacher(teacher);
 
-        schoolDAO.saveCourse(course);
+        schoolDAO.save(course);
     }
 }

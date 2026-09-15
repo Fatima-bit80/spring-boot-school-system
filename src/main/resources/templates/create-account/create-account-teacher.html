@@ -10,12 +10,17 @@
 
 
     <input type="text"  th:field="*{teacher.firstName}" placeholder="First Name">
+    <br>
     <input type="text"  th:field="*{teacher.lastName}" placeholder="Last Name">
+    <br>
     <input type="hidden" th:field="*{member.active}">
+    <br>
     <input type="email"  th:field="*{member.email}" placeholder="Email">
+    <br>
     <input type="password" name="password" th:field="*{member.password}" placeholder="Password" >
+    <br>
     <input type="text" th:field="*{member.role}" readonly>
-
+    <br>
     <input type="submit" value="Create Teacher">
 </form>
 

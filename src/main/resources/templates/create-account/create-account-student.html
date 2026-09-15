@@ -10,12 +10,19 @@
 
 
     <input type="text"  th:field="*{student.firstName}" placeholder="First Name">
+    <br>
     <input type="text"  th:field="*{student.lastName}" placeholder="Last Name">
+    <br>
     <input type="email"  th:field="*{member.email}" placeholder="Email">
+    <br>
     <input type="hidden" th:field="*{member.active}">
+    <br>
     <input type="password" name="password" th:field="*{member.password}" placeholder="Password" >
+    <br>
     <input type="number" name="year" th:field="*{student.year}" placeholder="Year">
+    <br>
     <input type="text" th:field="*{member.role}" readonly >
+    <br>
     <input type="submit" value="Create Student">
 </form>
 
