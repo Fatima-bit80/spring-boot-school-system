@@ -1,6 +1,6 @@
 package com.example.schoolManagement.service;
 
-import com.example.schoolManagement.dao.SchoolDAO;
+import com.example.schoolManagement.dao.*;
 import com.example.schoolManagement.dto.CourseDTO;
 import com.example.schoolManagement.dto.GradeRow;
 import com.example.schoolManagement.dto.GradesForm;
@@ -10,103 +10,113 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SchoolServiceImpl implements  SchoolService {
 
-    private SchoolDAO schoolDAO;
+    private CourseRepository courseRepository;
+    private EnrollmentRepository enrollmentRepository;
+    private MemberRepository memberRepository;
+    private StudentRepository studentRepository;
+    private TeacherRepository teacherRepository;
+
 
     @Autowired
-    public SchoolServiceImpl(SchoolDAO schoolDAO) {
-        this.schoolDAO = schoolDAO;
+    public SchoolServiceImpl(CourseRepository courseRepository,EnrollmentRepository enrollmentRepository,MemberRepository memberRepository,StudentRepository studentRepository,TeacherRepository teacherRepository) {
+        this.courseRepository = courseRepository;
+        this.enrollmentRepository = enrollmentRepository;
+        this.memberRepository = memberRepository;
+        this.studentRepository = studentRepository;
+        this.teacherRepository = teacherRepository;
     }
 
     @Override
     @Transactional
     public void saveMember(Member member) {
-        schoolDAO.save(member);
+        memberRepository.save(member);
     }
 
 
     @Override
     @Transactional
     public void saveStudent(Student student) {
-        schoolDAO.save(student);
+        studentRepository.save(student);
     }
 
     @Override
     @Transactional
     public void saveTeacher(Teacher teacher) {
-        schoolDAO.save(teacher);
+        teacherRepository.save(teacher);
     }
 
     @Override
     public Member findMemberByEmail(String email) {
-        return schoolDAO.findMemberByEmail(email);
+       return memberRepository.findById(email).get();
     }
 
     @Override
     public List<Enrollment> findEnrollmentsOfStudent(int studentId) {
-        return schoolDAO.findEnrollmentsForStudent(studentId);
+        return enrollmentRepository.findEnrollmentsForStudent(studentId);
     }
 
     @Override
     public List<Course> findAvailableCourses(int studentId) {
-        return schoolDAO.findAvailableCoursesForStudent(studentId);
+        return courseRepository.findAvailableCoursesForStudent(studentId);
     }
 
     @Override
     @Transactional
     public void deleteEnrollment(int id) {
- schoolDAO.deleteEnrollment(id);
+        enrollmentRepository.deleteById(id);
     }
 
     @Override
     @Transactional
     public void saveEnrollment(String courseCode, int studentId) {
-        Student s =schoolDAO.findStudentById(studentId);
-        Course c =schoolDAO.findCourseByCode(courseCode);
-        Enrollment e = new Enrollment(c,s);
-        schoolDAO.save(e);
+        Student student = studentRepository.findById(studentId).get();
+        Course course = courseRepository.findById(courseCode).get();
+        Enrollment e = new Enrollment(course,student);
+        enrollmentRepository.save(e);
     }
 
     @Override
     public List<Enrollment> findEnrollmentRequestsForTeacher(int teacherId) {
-        return schoolDAO.findEnrollmentRequestsForTeacher(teacherId);
+        return enrollmentRepository.findEnrollmentRequestsForTeacher(teacherId);
     }
 
     @Override
     @Transactional
     public void acceptEnrollmentRequest(int requestId) {
-        Enrollment e = schoolDAO.findEnrollmentById(requestId);
+        Enrollment e = enrollmentRepository.findById(requestId).get();
         e.setApproved(1);
-        schoolDAO.save(e);
+        enrollmentRepository.save(e);
     }
 
     @Override
     public List<Course> findCoursesByTeacherId(int teacherId) {
-        return schoolDAO.findCoursesForTeacher(teacherId);
+        return courseRepository.findCoursesForTeacher(teacherId);
     }
 
     @Override
     public List<Enrollment> findEnrollmentsOfCourse(String code) {
-        return schoolDAO.findEnrollmentsForCourse(code);
+        return enrollmentRepository.findEnrollmentsForCourse(code);
     }
 
     @Override
     @Transactional
     public void updateGrades(GradesForm gradesForm) {
         for(GradeRow row : gradesForm.getRows()) {
-            Enrollment e = schoolDAO.findEnrollmentById(row.getEnrollmentId());
+            Enrollment e = enrollmentRepository.findById(row.getEnrollmentId()).get();
             e.setGrade(row.getGrade());
 
-schoolDAO.save(e);
+enrollmentRepository.save(e);
         }
     }
 
     @Override
     public List<Teacher> getAllTeachers() {
-        return schoolDAO.findAllTeachers();
+        return teacherRepository.findAll();
     }
 
     @Override
@@ -117,9 +127,9 @@ schoolDAO.save(e);
         course.setName(courseDTO.getName());
         course.setYear(courseDTO.getYear());
 
-        Teacher teacher = schoolDAO.findTeacherById(courseDTO.getTeacherId());
+        Teacher teacher = teacherRepository.findById(courseDTO.getTeacherId()).get();
         course.setTeacher(teacher);
 
-        schoolDAO.save(course);
+        courseRepository.save(course);
     }
 }
