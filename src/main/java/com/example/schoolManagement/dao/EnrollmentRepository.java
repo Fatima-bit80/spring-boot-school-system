@@ -10,21 +10,16 @@ import java.util.List;
 public interface EnrollmentRepository extends JpaRepository<Enrollment,Integer> {
 
 
-
-
-
-
-
     @Query( "SELECT e FROM Enrollment e " +
             "JOIN FETCH e.course c " +
             "JOIN FETCH c.teacher " +
             "WHERE e.student.id = ?1")
-    public List<Enrollment> findEnrollmentsForStudent(int studentId);
+    List<Enrollment> findEnrollmentsForStudent(int studentId);
 
     @Query("SELECT e FROM Enrollment e " +
             "JOIN FETCH e.student s " +
             "WHERE e.course.code = ?1 AND e.approved = 1")
-    public List<Enrollment> findEnrollmentsForCourse(String code);
+    List<Enrollment> findEnrollmentsForCourse(String code);
 
 
     @Query( "SELECT e FROM Enrollment e " +
@@ -33,6 +28,6 @@ public interface EnrollmentRepository extends JpaRepository<Enrollment,Integer> 
             "JOIN FETCH e.student s " +
             "WHERE c.teacher.id = ?1 AND " +
             "e.approved = 0")
-    public List<Enrollment> findEnrollmentRequestsForTeacher(int teacherId);
+    List<Enrollment> findEnrollmentRequestsForTeacher(int teacherId);
 
 }
