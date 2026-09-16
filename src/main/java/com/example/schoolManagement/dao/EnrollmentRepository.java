@@ -16,6 +16,7 @@ public interface EnrollmentRepository extends JpaRepository<Enrollment,Integer> 
             "WHERE e.student.id = ?1")
     List<Enrollment> findEnrollmentsForStudent(int studentId);
 
+
     @Query("SELECT e FROM Enrollment e " +
             "JOIN FETCH e.student s " +
             "WHERE e.course.code = ?1 AND e.approved = 1")
