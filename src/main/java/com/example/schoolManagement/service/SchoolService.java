@@ -10,7 +10,6 @@ public interface SchoolService {
 
 
   //accounts:
-    void saveMember(Member member);
   void saveStudent(Student student);
   void saveTeacher(Teacher teacher);
     Member findMemberByEmail(String email);

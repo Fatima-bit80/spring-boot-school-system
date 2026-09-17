@@ -7,6 +7,9 @@ import com.example.schoolManagement.dto.GradesForm;
 import com.example.schoolManagement.entity.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,33 +23,40 @@ public class SchoolServiceImpl implements  SchoolService {
     private MemberRepository memberRepository;
     private StudentRepository studentRepository;
     private TeacherRepository teacherRepository;
+    private PasswordEncoder passwordEncoder;
 
 
     @Autowired
-    public SchoolServiceImpl(CourseRepository courseRepository,EnrollmentRepository enrollmentRepository,MemberRepository memberRepository,StudentRepository studentRepository,TeacherRepository teacherRepository) {
+    public SchoolServiceImpl(CourseRepository courseRepository,EnrollmentRepository enrollmentRepository,MemberRepository memberRepository,StudentRepository studentRepository,TeacherRepository teacherRepository,PasswordEncoder passwordEncoder) {
         this.courseRepository = courseRepository;
         this.enrollmentRepository = enrollmentRepository;
         this.memberRepository = memberRepository;
         this.studentRepository = studentRepository;
         this.teacherRepository = teacherRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    @Override
-    @Transactional
-    public void saveMember(Member member) {
-        memberRepository.save(member);
-    }
+
 
 
     @Override
     @Transactional
     public void saveStudent(Student student) {
+        Member member = student.getMember();
+        String plainTextPassword = member.getPassword();
+        String encodedPassword = passwordEncoder.encode(plainTextPassword);
+        member.setPassword(encodedPassword);
+
         studentRepository.save(student);
     }
 
     @Override
     @Transactional
     public void saveTeacher(Teacher teacher) {
+        Member member = teacher.getMember();
+        String plainTextPassword = member.getPassword();
+        String encodedPassword = passwordEncoder.encode(plainTextPassword);
+        member.setPassword(encodedPassword);
         teacherRepository.save(teacher);
     }
 
@@ -132,4 +142,6 @@ enrollmentRepository.save(e);
 
         courseRepository.save(course);
     }
+
+
 }

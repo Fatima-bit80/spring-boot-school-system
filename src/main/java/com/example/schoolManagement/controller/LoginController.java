@@ -51,12 +51,9 @@ public class LoginController {
         Teacher teacher = teacherDTO.getTeacher();
         Member member = teacherDTO.getMember();
 
-        String password ="{noop}"+  member.getPassword();
-        member.setPassword(password);
 
         teacher.setMember(member);
 
-        schoolService.saveMember(member);
         schoolService.saveTeacher(teacher);
 
 
@@ -71,11 +68,8 @@ public class LoginController {
         Student student = studentDTO.getStudent();
         Member member = studentDTO.getMember();
 
-        String password ="{noop}"+  member.getPassword();
-        member.setPassword(password);
 
 
-        schoolService.saveMember(member);
         student.setMember(member);
         schoolService.saveStudent(student);
 
