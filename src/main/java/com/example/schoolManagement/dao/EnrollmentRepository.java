@@ -13,7 +13,7 @@ public interface EnrollmentRepository extends JpaRepository<Enrollment,Integer> 
     @Query( "SELECT e FROM Enrollment e " +
             "JOIN FETCH e.course c " +
             "JOIN FETCH c.teacher " +
-            "WHERE e.student.id = ?1")
+            "WHERE e.student.studentId = ?1")
     List<Enrollment> findEnrollmentsForStudent(int studentId);
 
 
@@ -27,7 +27,7 @@ public interface EnrollmentRepository extends JpaRepository<Enrollment,Integer> 
             "JOIN FETCH e.course c " +
             "JOIN c.teacher " +
             "JOIN FETCH e.student s " +
-            "WHERE c.teacher.id = ?1 AND " +
+            "WHERE c.teacher.teacherId = ?1 AND " +
             "e.approved = 0")
     List<Enrollment> findEnrollmentRequestsForTeacher(int teacherId);
 

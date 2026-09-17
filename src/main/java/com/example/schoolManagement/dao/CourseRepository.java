@@ -13,7 +13,7 @@ public interface CourseRepository extends JpaRepository<Course, String> {
             " FROM Course c1" +
             " WHERE c1.code NOT IN(" +
             " SELECT e.course.code FROM Enrollment e " +
-            "  WHERE e.student.id = ?1)")
+            "  WHERE e.student.studentId = ?1)")
     List<Course> findAvailableCoursesForStudent(int studentId);
 
 
